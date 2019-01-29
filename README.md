@@ -32,9 +32,9 @@ List of features to be added in the future:
 
 -----
 <span>
-<img src="https://i.imgur.com/3Uw5ucD.png" width="200" />
-<img src="https://i.imgur.com/2wxUwxe.png" width="200" />
-<img src="https://i.imgur.com/TDYUIWE.png" width="200" />
-<img src="https://i.imgur.com/azlRFHE.png" width="200" />
-<img src="https://i.imgur.com/3LJZdlU.png" width="200" />
+<img src="https://i.imgur.com/3Uw5ucD.png" width="400" />
+<img src="https://i.imgur.com/2wxUwxe.png" width="400" />
+<img src="https://i.imgur.com/TDYUIWE.png" width="400" />
+<img src="https://i.imgur.com/azlRFHE.png" width="400" />
+<img src="https://i.imgur.com/3LJZdlU.png" width="400" />
 </span>
