@@ -32,12 +32,8 @@ List of features to be added in the future:
 
 -----
 
-![enter image description here](https://i.imgur.com/3Uw5ucD.png | width=300)
-
-![enter image description here](https://i.imgur.com/2wxUwxe.png | width=300)
-
-![enter image description here](https://i.imgur.com/TDYUIWE.png | width=300)
-
-![enter image description here](https://i.imgur.com/azlRFHE.png | width=300)
-
-![enter image description here](https://i.imgur.com/3LJZdlU.png | width=300)
+<img src="https://i.imgur.com/3Uw5ucD.png" width="300" />
+<img src="https://i.imgur.com/2wxUwxe.png" width="300" />
+<img src="https://i.imgur.com/TDYUIWE.png" width="300" />
+<img src="https://i.imgur.com/azlRFHE.png" width="300" />
+<img src="https://i.imgur.com/3LJZdlU.png" width="300" />
