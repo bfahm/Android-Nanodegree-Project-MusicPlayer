@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Music Player</string>
+    <string name="details_back">Back</string>
+    <string name="details_song_title">Title</string>
+    <string name="details_song_artist">Artist</string>
+    <string name="details_song_duration">Duration</string>
+    <string name="library_search_library">Search Library...</string>
+    <string name="library_sort_by_songs">Songs</string>
+    <string name="library_sort_by_artists">Artists</string>
+    <string name="library_sort_by_albums">Albums</string>
+    <string name="library_permission_error">Permission Not Granted</string>
+    <string name="library_permission_explain">The application needs access to your internal storage to be able to view and play your current library of songs.</string>
+    <string name="main_current_duration">00:00</string>
+    <string name="main_max_duration">00:00</string>
+    <string name="lib_wid_select_a_track">Select a track..</string>
+    <string name="lib_search_sortby">Sort Library By:</string>
+    <string name="lib_search_search">Search Library...</string>
+</resources>

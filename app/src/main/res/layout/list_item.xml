@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:gravity="center_vertical"
+    android:padding="8dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/album_cover"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        tools:src="@drawable/dummy_cover"
+        app:civ_border_color="@color/colorAccent"
+        app:civ_border_width="0dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp"
+        android:gravity="center_vertical"
+        android:layout_marginStart="16dp">
+        <TextView
+            android:id="@+id/title_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Song Title"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="By Artist"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+</LinearLayout>
