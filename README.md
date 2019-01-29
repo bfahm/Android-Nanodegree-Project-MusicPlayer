@@ -31,9 +31,10 @@ List of features to be added in the future:
  Be sure to have tracks in the emulator/device to be able to test the app.
 
 -----
-
-<img src="https://i.imgur.com/3Uw5ucD.png" width="300" />
-<img src="https://i.imgur.com/2wxUwxe.png" width="300" />
-<img src="https://i.imgur.com/TDYUIWE.png" width="300" />
-<img src="https://i.imgur.com/azlRFHE.png" width="300" />
-<img src="https://i.imgur.com/3LJZdlU.png" width="300" />
+<span>
+<img src="https://i.imgur.com/3Uw5ucD.png" width="200" />
+<img src="https://i.imgur.com/2wxUwxe.png" width="200" />
+<img src="https://i.imgur.com/TDYUIWE.png" width="200" />
+<img src="https://i.imgur.com/azlRFHE.png" width="200" />
+<img src="https://i.imgur.com/3LJZdlU.png" width="200" />
+</span>
