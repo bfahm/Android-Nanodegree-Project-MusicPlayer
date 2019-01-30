@@ -3,13 +3,15 @@ package com.xencosworks.musicplayer;
 import android.content.Intent;
 import android.database.Cursor;
 import android.provider.MediaStore;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -20,7 +22,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Details extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity {
 
     private ListView trackList;
     private LinearLayout stateSongs;
@@ -32,6 +34,8 @@ public class Details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         stateSongs = findViewById(R.id.details_state_songs);
         trackList = findViewById(R.id.list_details);
         stateArtist = findViewById(R.id.details_state_artist);
@@ -41,7 +45,7 @@ public class Details extends AppCompatActivity {
         try {
             code = Integer.parseInt(intent.getStringExtra("stateCode"));
         } catch (NumberFormatException e) {
-            Log.v("Details", "Details called itself succefully");
+            Log.v("DetailsActivity", "DetailsActivity called itself succefully");
         }
         switch (code) {
             case 0:
@@ -64,15 +68,16 @@ public class Details extends AppCompatActivity {
             case 2:
                 displayTrackList(null, intent.getStringExtra("Album"));
         }
+    }
 
-
-        LinearLayout navBack = findViewById(R.id.details_navigate_back);
-        navBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getLocalSongs(String customArtist, String customAlbum) {
@@ -170,7 +175,7 @@ public class Details extends AppCompatActivity {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), Details.class);
+                Intent intent = new Intent(view.getContext(), DetailsActivity.class);
                 intent.putExtra("Title", songsList.get(position).getDetails()[0]);
                 intent.putExtra("Artist", songsList.get(position).getDetails()[1]);
                 intent.putExtra("Duration", songsList.get(position).getDetails()[2]);

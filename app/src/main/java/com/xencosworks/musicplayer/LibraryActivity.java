@@ -7,14 +7,18 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -27,7 +31,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Library extends AppCompatActivity {
+public class LibraryActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_EXTERNAL_STORAGE = 0;
     CardView errorMessage;
@@ -37,16 +41,41 @@ public class Library extends AppCompatActivity {
     private ListView listView;
     private LinearLayout expandSort;
     private int currentSetup = 1;
+    private ImageButton toPlayer;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = getIntent();
+        if (intent != null) {
+            TextView bottomWidgetDetails = findViewById(R.id.bottomCard_currentActiveDetails);
+            if (intent.getStringExtra("Title") != null) {
+                bottomWidgetDetails.setText(intent.getStringExtra("Title") + " - " + intent.getStringExtra("Artist"));
+            } else {
+                bottomWidgetDetails.setText(R.string.lib_wid_select_a_track);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         expandSort = findViewById(R.id.library_expandable_sort);
 
         CardView bottomWidget = findViewById(R.id.bottomCard);
         bottomWidget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        toPlayer = findViewById(R.id.go_back_to_player);
+        toPlayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -134,17 +163,23 @@ public class Library extends AppCompatActivity {
                 }
             }
         });
+    }
 
-        Intent intent = getIntent();
-        if (intent != null) {
-            TextView bottomWidgetDetails = findViewById(R.id.bottomCard_currentActiveDetails);
-            if (intent.getStringExtra("Title") != null) {
-                bottomWidgetDetails.setText(intent.getStringExtra("Title") + " - " + intent.getStringExtra("Artist"));
-            } else {
-                bottomWidgetDetails.setText(R.string.lib_wid_select_a_track);
-            }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        // useful if launch mode was set to singleTask, this will always get the 'latest' intent
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
         }
-
+        return super.onOptionsItemSelected(item);
     }
 
     private void toggleSearchBar(int toggleCode) {
@@ -154,6 +189,7 @@ public class Library extends AppCompatActivity {
         ImageView tappableIcon = findViewById(R.id.library_sort_by_btn);
         ImageView searchIcon = findViewById(R.id.search_bar_search_btn);
         TextView searchInfo = findViewById(R.id.search_info_text);
+        toPlayer = findViewById(R.id.go_back_to_player);
 
         switch (toggleCode) {
             case 0:
@@ -165,6 +201,7 @@ public class Library extends AppCompatActivity {
                 listView.setVisibility(View.GONE);
                 searchIcon.setVisibility(View.GONE);
                 searchInfo.setText(R.string.lib_search_sortby);
+                toPlayer.setVisibility(View.GONE);
                 break;
             case 1:
                 expandSort.setVisibility(View.GONE);
@@ -175,6 +212,7 @@ public class Library extends AppCompatActivity {
                 listView.setVisibility(View.VISIBLE);
                 searchIcon.setVisibility(View.VISIBLE);
                 searchInfo.setText(R.string.lib_search_search);
+                toPlayer.setVisibility(View.VISIBLE);
                 break;
         }
 
@@ -334,6 +372,8 @@ public class Library extends AppCompatActivity {
                 intent.putExtra("Artist", songsList.get(position).getDetails()[1]);
                 intent.putExtra("Duration", songsList.get(position).getDetails()[2]);
 
+                Log.v("ON LIB", ""+songsList.get(position).getDetails()[0]);
+
                 startActivity(intent);
 
             }
@@ -343,7 +383,7 @@ public class Library extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 if (currentSetup == 1) {
-                    Intent intent = new Intent(view.getContext(), Details.class);
+                    Intent intent = new Intent(view.getContext(), DetailsActivity.class);
                     intent.putExtra("Title", songsList.get(position).getDetails()[0]);
                     intent.putExtra("Artist", songsList.get(position).getDetails()[1]);
                     intent.putExtra("Duration", songsList.get(position).getDetails()[2]);
@@ -383,7 +423,7 @@ public class Library extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), Details.class);
+                Intent intent = new Intent(view.getContext(), DetailsActivity.class);
                 intent.putExtra("Artist", artistList.get(position).getmArtistName());
                 intent.putExtra("Track Count", artistList.get(position).getmTrackCount());
                 intent.putExtra("stateCode", 1 + "");
@@ -421,7 +461,7 @@ public class Library extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), Details.class);
+                Intent intent = new Intent(view.getContext(), DetailsActivity.class);
                 intent.putExtra("Album", albumList.get(position).getDetails()[0]);
                 intent.putExtra("Track Count", albumList.get(position).getDetails()[1]);
                 intent.putExtra("Album Art", albumList.get(position).getDetails()[2]);

@@ -5,7 +5,7 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@color/colorBackgroundMain"
 android:orientation="vertical"
-tools:context="com.xencosworks.musicplayer.Details">
+tools:context="com.xencosworks.musicplayer.DetailsActivity">
 
 <ImageView
     android:id="@+id/header"
@@ -23,7 +23,7 @@ tools:context="com.xencosworks.musicplayer.Details">
     android:layout_marginTop="-16dp"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context="com.xencosworks.musicplayer.Details" />
+    tools:context="com.xencosworks.musicplayer.DetailsActivity" />
 
 <LinearLayout
     android:id="@+id/details_state_artist"
@@ -51,35 +51,7 @@ tools:context="com.xencosworks.musicplayer.Details">
         tools:text="Track Count" />
 </LinearLayout>
 
-<LinearLayout
-    android:id="@+id/details_navigate_back"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/topCard"
-    android:layout_marginLeft="16dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="8dp"
-    android:orientation="horizontal"
-    android:paddingEnd="16dp"
-    android:paddingRight="16dp">
-
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_action_back" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:fontFamily="sans-serif-condensed"
-        android:text="@string/details_back"
-        android:textAllCaps="true"
-        android:textColor="@android:color/white"
-        android:textSize="16sp" />
-</LinearLayout>
-
-<ImageView
+<ImageButton
     android:id="@+id/detalis_fab"
     android:layout_width="55dp"
     android:layout_height="55dp"
@@ -93,7 +65,8 @@ tools:context="com.xencosworks.musicplayer.Details">
     android:background="@drawable/fab"
     android:elevation="15dp"
     android:padding="10dp"
-    android:src="@drawable/ic_action_play" />
+    android:src="@drawable/ic_action_play"
+    android:visibility="gone"/>
 
 <LinearLayout
     android:id="@+id/details_state_songs"
