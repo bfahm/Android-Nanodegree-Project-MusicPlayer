@@ -15,20 +15,22 @@
             android:name=".MainActivity"
             android:label="@string/activity_label_main_screen"
             android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".LibraryActivity"
-            android:label="@string/activity_label_library"
+            android:label="MusicPlayer"
             android:parentActivityName="com.xencosworks.musicplayer.MainActivity"
             android:launchMode="singleTask">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.xencosworks.musicplayer.MainActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".DetailsActivity"

@@ -42,8 +42,8 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:src="@drawable/dummy_cover" />
 
         <View
@@ -97,7 +97,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:theme="@style/Seekbar" />
+            android:theme="@style/Seekbar"
+            android:id="@+id/main_seekbar"/>
 
         <TextView
             android:id="@+id/main_song_duration"
@@ -126,14 +127,17 @@
             android:padding="10dp"
             android:src="@drawable/ic_action_prev" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:background="@drawable/button"
             android:padding="15dp"
-            android:src="@drawable/ic_action_play" />
+            android:src="@mipmap/ic_music_play"
+            tools:src="@mipmap/ic_music_pause"
+            android:id="@+id/main_btn_play_pause"
+            />
 
         <ImageView
             android:layout_width="50dp"

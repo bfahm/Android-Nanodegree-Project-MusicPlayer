@@ -175,10 +175,10 @@
         android:background="@drawable/fab"
         android:elevation="15dp"
         android:padding="10dp"
-        android:src="@drawable/ic_action_play" />
+        android:src="@mipmap/ic_music_play" />
 
     <ListView
-
+        android:drawSelectorOnTop="true"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/list"
@@ -289,7 +289,7 @@
                 android:layout_height="25dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_action_play" />
+                android:src="@mipmap/ic_music_play" />
 
             <TextView
                 android:id="@+id/bottomCard_currentActiveDetails"

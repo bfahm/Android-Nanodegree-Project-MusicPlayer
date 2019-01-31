@@ -62,8 +62,6 @@ public class LibraryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         expandSort = findViewById(R.id.library_expandable_sort);
 
         CardView bottomWidget = findViewById(R.id.bottomCard);
@@ -172,16 +170,6 @@ public class LibraryActivity extends AppCompatActivity {
         // useful if launch mode was set to singleTask, this will always get the 'latest' intent
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void toggleSearchBar(int toggleCode) {
         LinearLayout currentSetup = findViewById(R.id.current_setup);
         ImageView playFab = findViewById(R.id.play_fab);
@@ -255,7 +243,8 @@ public class LibraryActivity extends AppCompatActivity {
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.DURATION,
-                MediaStore.Audio.Media.TRACK
+                MediaStore.Audio.Media.TRACK,
+                MediaStore.Audio.Media.DATA
         };
 
         Cursor cursor = this.managedQuery(
@@ -267,7 +256,8 @@ public class LibraryActivity extends AppCompatActivity {
 
         songsList.clear();
         while (cursor.moveToNext()) {
-            songsList.add(new Song(cursor.getString(0), cursor.getString(1), convertDuration(cursor.getString(2)), cursor.getString(3)));
+            songsList.add(new Song(cursor.getString(0), cursor.getString(1),
+                    convertDuration(cursor.getString(2)), cursor.getString(3), cursor.getString(4)));
         }
 
         Collections.sort(songsList, new SortByTitle());
@@ -364,6 +354,7 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
 
+        // for navigating back to main activity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -371,6 +362,7 @@ public class LibraryActivity extends AppCompatActivity {
                 intent.putExtra("Title", songsList.get(position).getDetails()[0]);
                 intent.putExtra("Artist", songsList.get(position).getDetails()[1]);
                 intent.putExtra("Duration", songsList.get(position).getDetails()[2]);
+                intent.putExtra("Uri", songsList.get(position).getDataUri());
 
                 Log.v("ON LIB", ""+songsList.get(position).getDetails()[0]);
 
@@ -379,6 +371,7 @@ public class LibraryActivity extends AppCompatActivity {
             }
         });
 
+        // for entering details activity
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {

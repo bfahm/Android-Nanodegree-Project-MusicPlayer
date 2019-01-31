@@ -34,8 +34,6 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         stateSongs = findViewById(R.id.details_state_songs);
         trackList = findViewById(R.id.list_details);
         stateArtist = findViewById(R.id.details_state_artist);
@@ -68,16 +66,14 @@ public class DetailsActivity extends AppCompatActivity {
             case 2:
                 displayTrackList(null, intent.getStringExtra("Album"));
         }
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+        View navBack = findViewById(R.id.details_navigate_back);
+        navBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void getLocalSongs(String customArtist, String customAlbum) {
@@ -94,7 +90,8 @@ public class DetailsActivity extends AppCompatActivity {
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.DURATION,
-                MediaStore.Audio.Media.TRACK
+                MediaStore.Audio.Media.TRACK,
+                MediaStore.Audio.Media.DATA
         };
 
         Cursor cursor = this.managedQuery(
@@ -106,7 +103,8 @@ public class DetailsActivity extends AppCompatActivity {
 
         songsList.clear();
         while (cursor.moveToNext()) {
-            songsList.add(new Song(cursor.getString(0), cursor.getString(1), convertDuration(cursor.getString(2)), cursor.getString(3)));
+            songsList.add(new Song(cursor.getString(0), cursor.getString(1),
+                    convertDuration(cursor.getString(2)), cursor.getString(3), cursor.getString(4)));
         }
 
         if (customArtist != null) {
@@ -167,6 +165,7 @@ public class DetailsActivity extends AppCompatActivity {
                 intent.putExtra("Title", songsList.get(position).getDetails()[0]);
                 intent.putExtra("Artist", songsList.get(position).getDetails()[1]);
                 intent.putExtra("Duration", songsList.get(position).getDetails()[2]);
+                intent.putExtra("Uri", songsList.get(position).getDataUri());
                 startActivity(intent);
 
             }
